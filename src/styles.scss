@@ -1,0 +1,16 @@
+/* You can add global styles to this file, and also import other style files */
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@import "~@swimlane/ngx-datatable/index.css";
+@import "~@swimlane/ngx-datatable/themes/material.css";
+@import "~@swimlane/ngx-datatable/assets/icons.css";
+html, body { height: 100%; }
+body {font-family: Roboto, "Helvetica Neue", sans-serif; }
+.mb12{
+    margin-bottom: 12px !important;
+}
+.mt12{
+    margin-top: 12px !important;
+}
+.ml12{
+    margin-left: 12px !important;
+}

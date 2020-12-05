@@ -1,0 +1,46 @@
+<mat-expansion-panel expanded='true' hideToggle class="mt12">
+    <mat-expansion-panel-header>
+        <mat-panel-title>
+            <h3>Search List</h3>
+        </mat-panel-title>
+    </mat-expansion-panel-header>
+    <form [formGroup]="searchForm">
+        <mat-form-field>
+            <mat-label>Choose Category</mat-label>
+            <mat-select required formControlName='categoryType'>
+                <mat-option *ngFor="let topic of Topics" [value]="topic.id">{{topic.topicName}}</mat-option>
+            </mat-select>
+            <mat-error class="mb12" *ngIf='searchForm.controls["categoryType"].hasError("required")'>
+                Category is required
+            </mat-error>
+        </mat-form-field>
+
+        <div class="mt12">
+            <button mat-raised-button color="accent" (click)="onSearchSubmit()">Submit</button>
+        </div>
+    </form>
+</mat-expansion-panel>
+
+<div class="mt12" *ngIf='showTable'>
+    <h2 class="mt12">Search List By Category</h2>
+    <ngx-datatable #myTable class='material ngx-datatable' [rows]="rowDatas" [count]="rowCount" [columnMode]="'force'"
+        [headerHeight]="'auto'" [footerHeight]="50" [rowHeight]="'auto'" [offset]="0" [externalPaging]="true"
+        [limit]="pageLimit" [scrollbarH]="true" [columns]="columns">
+        <ngx-datatable-column *ngFor="let col of columns" [name]="col.name" [resizeable]=false [canAutoResize]=true>
+            <ng-template let-row="row" ngx-datatable-cell-template>
+                <span *ngIf="col.prop == 'name'"> {{row[col.prop]}}</span>
+                <span *ngIf="col.prop != 'name'">{{row[col.prop]}}</span>
+            </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column [resizeable]="false" name="Action" [sortable]="false" [width]="50">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+                <button mat-raised-button color="accent" (click)='onEdit(row)'>
+                    Edit
+                </button>
+                <button mat-raised-button color="primary" class="ml12" (click)='onDelete(row)'>
+                    Delete
+                </button>
+            </ng-template>
+        </ngx-datatable-column>
+    </ngx-datatable>
+</div>

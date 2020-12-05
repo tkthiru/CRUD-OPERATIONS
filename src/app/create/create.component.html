@@ -1,0 +1,43 @@
+<mat-expansion-panel expanded='true' hideToggle class="mt12">
+    <mat-expansion-panel-header>
+        <mat-panel-title>
+            <h3> {{buttonLabel}} Form</h3>
+        </mat-panel-title>
+    </mat-expansion-panel-header>
+    <form [formGroup]="createForm" autocomplete="off">
+        <mat-form-field>
+            <mat-label>Choose Category Type</mat-label>
+            <mat-select required formControlName='categoryType'>
+                <mat-option *ngFor="let topic of Topics" [value]="topic.id">{{topic.topicName}}</mat-option>
+            </mat-select>
+            <mat-error class="mb12" *ngIf='createForm.controls["categoryType"].hasError("required")'>
+                Category Typeis required
+            </mat-error>
+        </mat-form-field>
+        <br />
+        <mat-form-field>
+            <mat-label>Name</mat-label>
+            <input required matInput formControlName='name'>
+            <mat-error class="mb12" *ngIf='createForm.controls["name"].hasError("required")'>
+                Name is required
+            </mat-error>
+        </mat-form-field>
+        <br />
+        <mat-form-field>
+            <mat-label>Description</mat-label>
+            <input required matInput formControlName='description'>
+            <mat-error class="mb12" *ngIf='createForm.controls["description"].hasError("required")'>
+                Description is required
+            </mat-error>
+        </mat-form-field>
+        <br />
+        <mat-form-field>
+            <mat-label>Remarks</mat-label>
+            <input  matInput formControlName='remarks'>
+          
+        </mat-form-field>
+        <div class="mt12">
+            <button mat-raised-button color="accent" (click)="onSubmit(buttonLabel)"> {{buttonLabel}}</button>
+        </div>
+    </form>
+</mat-expansion-panel>
